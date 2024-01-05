@@ -1,0 +1,15 @@
+.dashboard-container {
+    width: 100%;
+
+    .main-wrapper {
+        padding-left: var(--base-width-sidebar-full);
+
+        .content-container {
+            overflow: auto;
+        }
+    }
+
+    .main-wrapper-collapse {
+        padding-left: var(--base-width-sidebar-collapse) !important;
+    }
+}

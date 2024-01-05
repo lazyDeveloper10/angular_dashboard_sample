@@ -1,0 +1,19 @@
+{
+    "extends": "../../tsconfig.json",
+    "compilerOptions": {
+        "outDir": "../../out-tsc/app",
+        "types": []
+    },
+    "files": [
+        "src/main.ts",
+
+        "src/app/shared/models/keystore.model.ts",
+
+        "src/app/components/card/card.component.ts",
+        "src/app/components/header/header.component.ts",
+        "src/app/components/side-menu/side-menu.component.ts"
+    ],
+    "include": [
+        "src/**/*.d.ts"
+    ]
+}

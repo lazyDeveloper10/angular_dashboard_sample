@@ -1,0 +1,15 @@
+.sidebar-container {
+    min-height: 100vh;
+    top: 0;
+    left: 0;
+    position: fixed;
+    z-index: 100;
+
+    .side-bar-wrapper {
+        width: 280px;
+    }
+
+    .sidebar-collapse {
+        width: 4.5rem;
+    }
+}

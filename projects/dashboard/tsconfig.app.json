@@ -6,6 +6,7 @@
     },
     "files": [
         "src/main.ts",
+        "src/app/pages/dashboard/dashboard.routing.ts"
     ],
     "include": [
         "src/**/*.d.ts"

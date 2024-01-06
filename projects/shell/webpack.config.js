@@ -29,10 +29,8 @@ module.exports = {
             library: { type: 'module' },
 
             remotes: {
-                'base': 'http://localhost:7500/remoteEntry.js',
-                'authentication': 'http://localhost:7750/remoteEntry.js',
-                'dashboard': 'http://localhost:8000/remoteEntry.js',
-                'systemAdmin': 'http://localhost:8100/remoteEntry.js',
+                'admin': 'http://localhost:4200/remoteEntry.js',
+                'dashboard': 'http://localhost:4200/remoteEntry.js',
             },
 
             shared: share({
@@ -40,6 +38,13 @@ module.exports = {
                 '@angular/common': { singleton: true, strictVersion: true, requiredVersion: 'auto' },
                 '@angular/common/http': { singleton: true, strictVersion: true, requiredVersion: 'auto' },
                 '@angular/router': { singleton: true, strictVersion: true, requiredVersion: 'auto' },
+
+                "ngx-toastr":{singleton: true, strictVersion: true, requiredVersion: 'auto'},
+
+                '@shared': {
+                    'singleton': true,
+                    'import': 'dist/shared'
+                },
 
                 ...sharedMappings.getDescriptors()
             })

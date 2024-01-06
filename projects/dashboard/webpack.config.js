@@ -31,7 +31,7 @@ module.exports = {
             name: 'dashboard',
             filename: 'remoteEntry.js',
             exposes: {
-                'SharedDashboardComponent': './projects/dashboard/src/app/app.routing.ts',
+                'SharedDashboardModule': './projects/dashboard/src/app/pages/dashboard/dashboard.routing.ts',
             },
 
             shared: share({
@@ -39,6 +39,13 @@ module.exports = {
                 '@angular/common': { singleton: true, strictVersion: true, requiredVersion: 'auto' },
                 '@angular/common/http': { singleton: true, strictVersion: true, requiredVersion: 'auto' },
                 '@angular/router': { singleton: true, strictVersion: true, requiredVersion: 'auto' },
+
+                "ngx-toastr":{singleton: true, strictVersion: true, requiredVersion: 'auto'},
+
+                '@shared': {
+                    'singleton': true,
+                    'import': 'dist/shared'
+                },
 
                 ...sharedMappings.getDescriptors()
             })

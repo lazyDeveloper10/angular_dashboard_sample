@@ -1,9 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
-import { AppSideMenuComponent } from './side-menu.component';
-import { AppHeaderComponent } from './header.component';
-import { AppFooterComponent } from './footer.component';
+import { AppFooterComponent, AppHeaderComponent, AppSideMenuComponent } from 'shared';
 
 @Component({
     standalone: true,
@@ -19,7 +17,11 @@ import { AppFooterComponent } from './footer.component';
     ],
     template: `
         <div class="dashboard-container">
-            <app-side-menu-component #appSideMenuComponent [menuList]="menuList"></app-side-menu-component>
+            <app-side-menu-component
+                #appSideMenuComponent
+                [collapse]="collapse"
+                [menuList]="menuList"
+            ></app-side-menu-component>
 
             <div
                 [class.main-wrapper-collapse]="collapse"
@@ -51,8 +53,8 @@ export class AppDefaultLayoutComponent {
             path: '/dashboard'
         },
         {
-            name: 'Admin',
-            path: '/admin'
+            name: 'Post',
+            path: '/post'
         }
     ];
 
@@ -63,7 +65,5 @@ export class AppDefaultLayoutComponent {
         this.collapse
             ? this.collapse = false
             : this.collapse = true;
-
-        this.appSideMenuComponent?.setCollapsed(this.collapse);
     }
 }

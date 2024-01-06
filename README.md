@@ -1,4 +1,9 @@
-# Sample
+# MicroFrontEnds
+
+1. it is using global library
+2. note: if there is an error please run buildLibrary - ng build --project shared 1st to build library and consume to all remote and shell
+
+3. note: better put toastr on response interceptors
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.3.
 

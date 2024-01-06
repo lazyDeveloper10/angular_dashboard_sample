@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ToastrModule } from 'ngx-toastr';
 
-import { routes } from './app.routes';
+import { routes } from './app.routing';
 
 export const appConfig: ApplicationConfig = {
     providers: [

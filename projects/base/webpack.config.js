@@ -31,9 +31,8 @@ module.exports = {
             name: "base",
             filename: "remoteEntry.js",
             exposes: {
-                'SharedKeystoreModel': './projects/base/src/app/shared/models/keystore.model.ts',
-
                 'SharedCardComponent': './projects/base/src/app/components/card/card.component.ts',
+                'SharedFooterComponent': './projects/base/src/app/components/footer/footer.component.ts',
                 'SharedHeaderComponent': './projects/base/src/app/components/header/header.component.ts',
                 'SharedSideMenuComponent': './projects/base/src/app/components/side-menu/side-menu.component.ts',
             },
@@ -44,8 +43,8 @@ module.exports = {
                 '@angular/common/http': { singleton: true, strictVersion: true, requiredVersion: 'auto' },
                 '@angular/router': { singleton: true, strictVersion: true, requiredVersion: 'auto' },
 
-                ...sharedMappings.getDescriptors()
-            })
+                ...sharedMappings.getDescriptors(),
+            }),
 
         }),
         sharedMappings.getPlugin()

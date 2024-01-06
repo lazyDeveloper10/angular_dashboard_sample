@@ -3,8 +3,13 @@
 
     .main-wrapper {
         padding-left: var(--base-width-sidebar-full);
+        position: relative;
+        will-change: auto;
+        transition: padding .15s;
 
         .content-container {
+            height: auto;
+            margin-bottom: 70px;
             overflow: auto;
         }
     }

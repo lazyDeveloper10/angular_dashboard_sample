@@ -1,5 +1,8 @@
-import { Component, ComponentFactoryResolver, OnInit, ViewContainerRef } from '@angular/core';
+import { Component, ComponentRef, EventEmitter, OnDestroy, OnInit, Output, ViewContainerRef } from '@angular/core';
 import { loadRemoteModule } from '@angular-architects/module-federation';
+import { Subject, takeUntil } from 'rxjs';
+
+import { environment } from '../../../environments/environment';
 
 @Component({
     standalone: true,
@@ -9,24 +12,33 @@ import { loadRemoteModule } from '@angular-architects/module-federation';
     imports: [],
     template: ``
 })
-export class AppHeaderComponent implements OnInit {
+export class AppHeaderComponent implements OnInit, OnDestroy {
+    @Output() onClickCollapsible = new EventEmitter<any>();
+
+    private ngUnsubscribe = new Subject();
+
     constructor(
         private viewContainerRef: ViewContainerRef
     ) {
     }
 
-    ngOnInit() {
-        loadRemoteModule({
-            type: 'module',
-            remoteEntry: 'http://localhost:7500/remoteEntry.js',
-            exposedModule: 'SharedHeaderComponent'
-        }).then(async (data: any) => {
-            const { setInput, instance } = this.viewContainerRef?.createComponent(data.AppHeaderComponent);
-
-            console.log(instance)
-
-        }).catch((err) => {
-            console.log(err);
+    async ngOnInit() {
+        const { AppHeaderComponent } = await loadRemoteModule({
+            ...environment.microFrontEnd.base,
+            exposedModule: environment.microFrontEnd.base.exposedModule.SharedHeaderComponent
         });
+
+        const component: ComponentRef<any> = this.viewContainerRef?.createComponent(AppHeaderComponent);
+
+        component.instance.onClickCollapsible
+            .pipe(takeUntil(this.ngUnsubscribe))
+            .subscribe((value: any) => {
+                this.onClickCollapsible.emit(value);
+            });
+    }
+
+    ngOnDestroy() {
+        this.ngUnsubscribe.next(true);
+        this.ngUnsubscribe.complete();
     }
 }

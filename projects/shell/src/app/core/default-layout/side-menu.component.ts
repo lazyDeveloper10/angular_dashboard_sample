@@ -1,5 +1,7 @@
-import { Component, ComponentRef, OnInit, ViewContainerRef } from '@angular/core';
+import { Component, ComponentRef, Input, OnInit, ViewContainerRef } from '@angular/core';
 import { loadRemoteModule } from '@angular-architects/module-federation';
+
+import { environment } from '../../../environments/environment';
 
 @Component({
     standalone: true,
@@ -10,8 +12,11 @@ import { loadRemoteModule } from '@angular-architects/module-federation';
     template: ``
 })
 export class AppSideMenuComponent implements OnInit {
+    @Input() menuList: any[] = [];
+
     component!: ComponentRef<{
-        collapse: boolean
+        collapse: boolean,
+        menuList: any[]
     }>;
 
     constructor(
@@ -21,18 +26,21 @@ export class AppSideMenuComponent implements OnInit {
 
     async ngOnInit() {
         const { AppSideMenuComponent } = await loadRemoteModule({
-            type: 'module',
-            remoteEntry: 'http://localhost:7500/remoteEntry.js',
-            exposedModule: 'SharedSideMenuComponent'
+            ...environment.microFrontEnd.base,
+            exposedModule: environment.microFrontEnd.base.exposedModule.SharedSideMenuComponent
         }).catch((err) => {
         });
 
         this.component = this.viewContainerRef?.createComponent(AppSideMenuComponent);
+
+        this.component.instance.menuList = this.menuList;
     }
 
-    setCollapsed() {
-        this.component.instance.collapse
-            ? this.component.instance.collapse = false
-            : this.component.instance.collapse = true;
+    setCollapsed(collapse: boolean) {
+        this.component.instance.collapse = collapse;
+    }
+
+    setSideMenu(menuList: any[]) {
+        this.component.instance.menuList = menuList;
     }
 }

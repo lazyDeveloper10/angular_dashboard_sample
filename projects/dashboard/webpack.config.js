@@ -31,12 +31,8 @@ module.exports = {
             name: 'dashboard',
             filename: 'remoteEntry.js',
             exposes: {
-                './Component': './projects/dashboard/src/app/app.component.ts',
+                'SharedDashboardComponent': './projects/dashboard/src/app/app.routing.ts',
             },
-
-            // remotes: {
-            //     'base': 'http://localhost:7500/remoteEntry.js',
-            // },
 
             shared: share({
                 '@angular/core': { singleton: true, strictVersion: true, requiredVersion: 'auto' },
